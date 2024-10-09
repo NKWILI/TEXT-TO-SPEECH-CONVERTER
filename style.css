@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0c0e2c;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1f1e47, #52287d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 50px;
+}
+
+.hero h1 {
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.hero h1::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: #ff2963;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+.hero h1 span {
+    color: #ff2963;
+}
+
+/* Text Area */
+textarea {
+    width: 600px;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    border: 2px solid #ff2963;
+    outline: none;
+    padding: 20px;
+    border-radius: 15px;
+    resize: none;
+    margin-bottom: 30px;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+textarea:hover, textarea:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #fff;
+}
+
+textarea::placeholder {
+    font-size: 16px;
+    color: #ddd;
+}
+
+/* Button and Dropdown */
+.row {
+    width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+button {
+    background: linear-gradient(45deg, #ff2963, #ff4785);
+    color: #fff;
+    font-size: 16px;
+    padding: 12px 40px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 10px rgba(255, 41, 99, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(255, 41, 99, 0.6);
+}
+
+button img {
+    width: 18px;
+    margin-right: 10px;
+}
+
+/* Select Box */
+select {
+    flex: 1;
+    color: #fff;
+    background: #403d84;
+    height: 50px;
+    padding: 0 20px;
+    border: 0;
+    outline: 0;
+    border-radius: 35px;
+    appearance: none;
+    background-image: url(text_to_speech_img/images/dropdown.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position-x: calc(100% - 20px);
+    background-position-y: 50%;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+select:hover, select:focus {
+    box-shadow: 0 5px 10px rgba(64, 61, 132, 0.5);
+}
+
+
+
