@@ -1,7 +1,7 @@
 # 🎧 **Text-to-Speech Converter**
 
 ![Project Demo](./text_to_speech_img/images/texttospeech.png)  
-*Live demo: [Try it here]( )*  
+*Live demo: [Try it here]( https://nkwili.github.io/TEXT-TO-SPEECH-CONVERTER/ )*  
 [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ## 🛠 Features
