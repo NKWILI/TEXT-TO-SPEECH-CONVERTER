@@ -1,46 +1,70 @@
-// Erstellt ein neues SpeechSynthesisUtterance-Objekt, das den gesprochenen Text speichert
-let speech = new SpeechSynthesisUtterance();
-
-// Leeres Array, um die verfügbaren Stimmen zu speichern
+// Text-to-Speech Functionality
+const speech = new SpeechSynthesisUtterance();
 let voices = [];
+const voiceSelect = document.querySelector('select');
 
-
-let voiceSelect = document.querySelector("select");
-
-window.speechSynthesis.onvoiceschanged = () => {
-    
-    // Holt alle verfügbaren Stimmen und speichert sie im voices-Array
+// Populate voices and set default voice
+function populateVoices() {
     voices = window.speechSynthesis.getVoices();
+    voiceSelect.innerHTML = ''; // Clear existing options
+    if (voices.length > 0) {
+        speech.voice = voices[0]; // Set default voice
+        voices.forEach((voice, i) => {
+            voiceSelect.add(new Option(voice.name, i));
+        });
+    }
+}
 
-    // Setzt die erste Stimme im Array als Standardstimme
-    speech.voice = voices[0];
+window.speechSynthesis.onvoiceschanged = populateVoices;
 
-    // Fügt jede Stimme als Option in das Dropdown-Menü ein
-    voices.forEach((voice, i) => {
-        // Erstellt eine neue Option mit dem Namen der Stimme und dem Index
-        voiceSelect.options[i] = new Option(voice.name, i);
-    });
-};
+// Check if voices are already available (in case the event doesn't fire)
+if (window.speechSynthesis.getVoices().length > 0) {
+    populateVoices();
+}
 
-// Event Listener für das Ändern der Stimme im Dropdown-Menü
-voiceSelect.addEventListener("change", () => {
+// Update voice when a new one is selected
+voiceSelect.addEventListener('change', () => {
     speech.voice = voices[voiceSelect.value];
 });
 
-// Event Listener für den Button, um die Sprachausgabe zu starten
-document.querySelector("button").addEventListener("click", () => {
-    
-    // Holt den Text aus dem Textbereich und setzt ihn als den zu sprechenden Text
-    speech.text = document.querySelector("textarea").value;
-
-    // Startet die Sprachausgabe mit dem angegebenen Text und der ausgewählten Stimme
-    window.speechSynthesis.speak(speech);
+// Listen button event listener
+document.querySelector('.speak-button').addEventListener('click', () => {
+    const text = document.querySelector('textarea').value;
+    if (text) {
+        speech.text = text;
+        window.speechSynthesis.speak(speech);
+    } else {
+        alert('Please enter some text to convert to speech.');
+    }
 });
 
+// Character Count
+const textarea = document.querySelector('textarea');
+const counterDiv = document.querySelector('.counter');
 
+const updateCharacterCount = () => {
+    const numberOfCharacters = textarea.value.length; // Removed trim()
+    counterDiv.innerHTML = `<h5>Character Count: ${numberOfCharacters}</h5>`;
+};
 
-// theme tooggle 
-const toggleButton = document.getElementById('theme-toggle');
-    toggleButton.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-    });
+textarea.addEventListener('input', updateCharacterCount);
+updateCharacterCount(); // Initialize
+
+// Theme Switching
+const themeButtons = document.querySelectorAll('.theme-btn');
+const storedTheme = localStorage.getItem('theme') || 'dark';
+
+const activateTheme = (theme) => {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeButtons.forEach(btn => 
+        btn.classList.toggle('active', btn.dataset.theme === theme)
+    );
+};
+
+themeButtons.forEach(button => {
+    button.addEventListener('click', () => activateTheme(button.dataset.theme));
+});
+
+activateTheme(storedTheme);
+
